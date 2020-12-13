@@ -22,6 +22,24 @@ $urlLatestVideo = 'https://www.googleapis.com/youtube/v3/search?key=AIzaSyC98nbO
 
 $result = get_CURL($urlLatestVideo);
 $latestVideoId = $result['items'][0]['id']['videoId'];
+$usernameIG = $result['data']['username'];
+$profilePictureIG = $result['data']['profile_pricture'];
+$followersIG = $result['data']['counts']['followed_by'];
+
+// instagram api
+$clietId = '';
+$accesToken = '';
+
+$result = get_CURL('');
+
+// latest IG Post
+$result = get_CURL('');
+
+$photos = [];
+foreach ($result['data'] as $photo) {
+  $photos[] = $photo['images']['thumbnail']['url'];
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -127,21 +145,24 @@ $latestVideoId = $result['items'][0]['id']['videoId'];
         <div class="col-md-5">
           <div class="row">
             <div class="col-md-4">
-              <img src="img/profile1.png" width="200" class="rounded-circle img-thumbnail">
+              <img src="<?= $profilePictureIG ?>" width="200" class="rounded-circle img-thumbnail">
             </div>
             <div class="col-md-8">
-              <h5>@sandhikagalih</h5>
-              <p>7000 Followers.</p>
+              <h5><?= $usernameIG ?></h5>
+              <p><?= $followersIG ?> Followers.</p>
             </div>
           </div>
 
           <div class="row mt-3 pb-3">
             <div class="col">
+              <?= foreach ($photos as $photo) : $?>
               <div class="ig-thumbnail">
                 <img src="img/thumbs/1.png" width="100">
                 <img src="img/thumbs/2.png" width="100">
                 <img src="img/thumbs/3.png" width="100">
+                <img src="<?= $photo;?>"
               </div>
+                <?= endforeach;?>
             </div>
           </div>
         </div>
